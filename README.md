@@ -30,6 +30,6 @@ make install
 cp bin/sbin/openvpn ../
 cd ../
 ```
-1. Download `FT Default VPN.ovpn` from Google Drive and include it in this directory
-1. Remove `auth-federate` and `auth-retry interact` options from `.ovpn` file
-1. Run `./aws-connect.sh`
+2. Download `FT Default VPN.ovpn` from Google Drive and include it in this directory
+3. Remove `auth-federate` and `auth-retry interact` options from `.ovpn` file
+4. Run `./aws-connect.sh`
