@@ -16,12 +16,20 @@ SAML Post data to the file
 
 ## How to use
 
-1. Build patched openvpn version and put it to the folder with a script
-1. Start HTTP server with `go run server.go`
-1. Set VPN_HOST in the [aws-connect.sh](aws-connect.sh)
-1. Replace CA section in the sample [vpn.conf](vpn.conf) with one from your AWS configuration
-1. Finally run `aws-connect.sh` to connect to the AWS.
-
-## Todo
-
-Better integrate SAML HTTP server with a script or rewrite everything on golang
+1. Download openvpn source, patch, and build
+```bash
+git clone https://github.com/samm-git/aws-vpn-client
+cd aws-vpn-client
+wget https://swupdate.openvpn.org/community/releases/openvpn-2.4.9.zip
+unzip openvpn-2.4.9.zip
+cd openvpn-2.4.9
+patch -p1 < ../openvpn-v2.4.9-aws.patch
+./configure --prefix="$(pwd)/bin"
+make
+make install
+cp bin/sbin/openvpn ../
+cd ../
+```
+1. Download `FT Default VPN.ovpn` from Google Drive and include it in this directory
+1. Remove `auth-federate` and `auth-retry interact` options from `.ovpn` file
+1. Run `./aws-connect.sh`
